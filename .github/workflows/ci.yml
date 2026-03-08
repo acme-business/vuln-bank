@@ -1,0 +1,26 @@
+name: CI Pipeline
+
+on:
+  pull_request:        
+  push:
+    branches: ["*"]   # ALL branches applies
+
+permissions: write-all  # token too mcuh permissions
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2   # 
+
+      - name: Setup Node
+        uses: actions/setup-node@v3  # 
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run app
+        env:
+          DB_PASSWORD: "supersecret123"   # password hardcoded"
+          AWS_SECRET_KEY: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"  # random AWS key
+        run: npm start
